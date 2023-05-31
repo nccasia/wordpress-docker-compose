@@ -38,9 +38,7 @@ services:
       - HTTPS_METHOD=noredirect
       - LETSENCRYPT_HOST=${WORDPRESS_WEBSITE_URL_WITHOUT_WWW}
       - LETSENCRYPT_EMAIL=${WORDPRESS_ADMIN_EMAIL}
-      - REDIRECT=${WORDPRESS_WEBSITE_URL}
-      # CHANGE THE REDIRECT URL
-      - REDIRECT=https://www.change-me-with-your-domain.com
+      - REDIRECT=${WORDPRESS_WEBSITE_URL:-https://www.change-me-with-your-domain.com}
       - WORKER_CONNECTIONS=1024
     networks:
       - ${COMPOSE_PROJECT_NAME}_default
