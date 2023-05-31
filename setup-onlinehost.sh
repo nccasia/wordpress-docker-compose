@@ -31,8 +31,8 @@ cp $env_file _trash/$env_file
 cp $compose_file  _trash/$compose_file
 # Download initial version
 rm -rf $compose_file $env_file
-curl -s https://raw.githubusercontent.com/kassambara/wordpress-docker-compose/master/docker-compose-onlinehost.yml > $compose_file
-curl -s https://raw.githubusercontent.com/kassambara/wordpress-docker-compose/master/.env > $env_file
+curl -s https://raw.githubusercontent.com/nccasia/wordpress-docker-compose/master/docker-compose-onlinehost.yml > $compose_file
+curl -s https://raw.githubusercontent.com/nccasia/wordpress-docker-compose/master/.env > $env_file
 
 
 # Update automatically .env file
