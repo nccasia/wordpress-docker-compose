@@ -14,6 +14,7 @@ user_name="wordpress"
 pass_word="wordpress"   # no special chars
 email="your-email@example.com"
 website_title="My Blog"
+expose_port=80
 website_url="https://www.example.com"
 phmyadmin_url="sql.example.com"
 env_file=".env"
@@ -44,6 +45,7 @@ sed -i -e "/DATABASE_PASSWORD/s/password/$pass_word/" $env_file
 sed -i -e "/DATABASE_USER/s/root/$user_name/" $env_file
 sed -i -e "/WORDPRESS_ADMIN_PASSWORD/s/wordpress/$pass_word/" $env_file
 sed -i -e "/WORDPRESS_ADMIN_USER/s/wordpress/$user_name/" $env_file
+sed -i -e "/WORDPRESS_PORT/s/80/$expose_port/" $env_file
 sed -i -e "s/your-email@example.com/$email/" $env_file
 
 # Update website info
