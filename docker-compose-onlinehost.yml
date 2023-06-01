@@ -44,7 +44,6 @@ services:
       - ${COMPOSE_PROJECT_NAME}_default
       - nginx-proxy
 
-
   mysql:
     image: mariadb:${MARIADB_VERSION:-latest}
     container_name: ${COMPOSE_PROJECT_NAME}_mysql
@@ -105,7 +104,30 @@ services:
       - WAIT_HOST_CONNECT_TIMEOUT=${WAIT_HOST_CONNECT_TIMEOUT:-30}
     networks:
       - ${COMPOSE_PROJECT_NAME}_default
+  offen:
+    image: offen/offen:latest
+    volumes:
+      - db:/var/opt/offen
+    labels:
+      - docker-volume-backup.stop-during-backup=true
 
+  backup:
+    image: offen/docker-volume-backup:v1.0.2
+    environment:
+      # A backup is taken each day at 2AM
+      BACKUP_CRON_EXPRESSION: "0 2 * * *"
+      # Backups are stored with a timestamp appended
+      BACKUP_FILENAME: "offen-db-%Y-%m-%dT%H-%M-%S.tar.gz"
+      # Backups older than 365 days will be pruned.
+      # If this value is not given, backup will be kept forever.
+      BACKUP_RETENTION_DAYS: "30"
+      # Credentials for your storage backend
+      AWS_ACCESS_KEY_ID: ${BACKUP_AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${BACKUP_AWS_SECRET_ACCESS_KEY}
+      AWS_S3_BUCKET_NAME: ${BACKUP_AWS_S3_BUCKET_NAME}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - db:/backup/offen-db:ro
 networks:
     wordpress_default:
         name: ${COMPOSE_PROJECT_NAME}_default
