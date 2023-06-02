@@ -106,6 +106,7 @@ services:
       - ${COMPOSE_PROJECT_NAME}_default
   offen:
     image: offen/offen:latest
+    container_name: ${COMPOSE_PROJECT_NAME}_offen
     volumes:
       - db:/var/opt/offen
     labels:
@@ -113,6 +114,7 @@ services:
 
   backup:
     image: offen/docker-volume-backup:v1.0.2
+    container_name: ${COMPOSE_PROJECT_NAME}_backup
     environment:
       # A backup is taken each day at 2AM
       BACKUP_CRON_EXPRESSION: "0 2 * * *"
