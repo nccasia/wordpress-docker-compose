@@ -28,7 +28,7 @@ using the following commands:
 
 ``` bash
 # Download a wordpress docker-compose example
-git clone https://github.com/kassambara/wordpress-docker-compose
+git clone https://github.com/nccasia/wordpress-docker-compose
 cd wordpress-docker-compose
 # Build and start installation
 docker-compose up -d --build
@@ -59,6 +59,64 @@ docker-compose down
 rm -rf certs/* certs-data/* logs/nginx/* mysql/* wordpress/*
 ```
 
+## Deploy WordPress in Production
+
+1. prepare your server
+- install docker and docker-compose
+
+2. clone this repository
+``` bash
+git clone https://github.com/nccasia/wordpress-docker-compose
+cd wordpress-docker-compose
+```
+
+3. create a .env file
+
+modify the `setup-onlinehost.sh` file
+
+```
+user_name="wordpress"
+pass_word="wordpress"   # no special chars
+email="your-email@example.com"
+website_title="My Blog"
+expose_port=80
+website_url="https://www.example.com"
+phmyadmin_url="sql.example.com"
+backup_aws_s3_key="example"
+backup_aws_s3_secret="example"
+backup_aws_s3_bucket="example"
+```
+4. run the script
+``` bash
+sudo chmod +x setup-onlinehost.sh
+./setup-onlinehost.sh
+```
+
+5. build and start the wordpress website
+``` bash
+make autoinstall
+``` 
+
+6. visit your site
+
+## Backup and Restore
+### Backup
+``` bash
+make backup
+```
+
+### Restore
+- list all backups
+
+``` bash
+make snaps
+```
+
+- restore from a backup
+
+``` bash
+make restore file=2020-05-20_12-00-00.tar.gz
+```
 ## References
 
   - [WordPress: with Nginx web server in

@@ -24,13 +24,13 @@ reset: clean
 snaps:
 	 aws s3 ls s3://${AWS_S3_BUCKET_NAME} --recursive --human-readable --summarize
 
-pull:
-	aws s3 cp s3://${AWS_S3_BUCKET_NAME}/$(file) test2.txt
+grab:
+	aws s3 cp s3://${AWS_S3_BUCKET_NAME}/$(file) $(file) 
 
 backup:
 	docker exec wordpress_backup backup
 
-restore:
+restore: grab
 	docker run -d --name backup_restore -v offen_data:/backup_restore alpine
-	docker cp <location_of_your_unpacked_backup> backup_restore:/backup_restore
+	docker cp $(file)  backup_restore:/backup_restore
 	docker stop backup_restore && docker rm backup_restore
