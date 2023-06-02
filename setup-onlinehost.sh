@@ -49,9 +49,9 @@ sed -i -e "/DATABASE_USER/s/root/$user_name/" $env_file
 sed -i -e "/WORDPRESS_ADMIN_PASSWORD/s/wordpress/$pass_word/" $env_file
 sed -i -e "/WORDPRESS_ADMIN_USER/s/wordpress/$user_name/" $env_file
 sed -i -e "/WORDPRESS_PORT/s/80/$expose_port/" $env_file
-sed -i -e "/BACKUP_AWS_ACCESS_KEY_ID/s/example/$backup_aws_s3_key/" $env_file
-sed -i -e "/BACKUP_AWS_SECRET_ACCESS_KEY/s/example/$backup_aws_s3_secret/" $env_file
-sed -i -e "/BACKUP_AWS_S3_BUCKET_NAME/s/example/$backup_aws_s3_bucket/" $env_file
+sed -i -e "/AWS_ACCESS_KEY_ID/s/example/$backup_aws_s3_key/" $env_file
+sed -i -e "/AWS_SECRET_ACCESS_KEY/s/example/$backup_aws_s3_secret/" $env_file
+sed -i -e "/AWS_S3_BUCKET_NAME/s/example/$backup_aws_s3_bucket/" $env_file
 sed -i -e "s/your-email@example.com/$email/" $env_file
 
 # Update website info

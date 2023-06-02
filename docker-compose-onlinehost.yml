@@ -104,9 +104,9 @@ services:
       # If this value is not given, backup will be kept forever.
       BACKUP_RETENTION_DAYS: "30"
       # Credentials for your storage backend
-      AWS_ACCESS_KEY_ID: ${BACKUP_AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${BACKUP_AWS_SECRET_ACCESS_KEY}
-      AWS_S3_BUCKET_NAME: ${BACKUP_AWS_S3_BUCKET_NAME}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_S3_BUCKET_NAME: ${AWS_S3_BUCKET_NAME}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - db:/backup/offen-db:ro
